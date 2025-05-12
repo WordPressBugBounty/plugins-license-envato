@@ -1,11 +1,11 @@
 === License For Envato ===
-Contributors: ashrafulsarkar, codeholt
-Tags: license, license manager, license key, software license, envato license, theme license, plugin license, license envato
+Contributors: ashrafulsarkar
+Tags: license, license manager, envato license, plugin license, license envato
 Donate link: https://www.buymeacoffee.com/ashrafulsarkar
-Requires at least: 5.6
-Tested up to: 6.4
-Stable tag: 1.0.0
-Requires PHP: 7.0
+Requires at least: 6.0
+Tested up to: 6.8
+Stable tag: 1.1.0
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,5 +45,10 @@ Installation procedure:
 4. Full details Documentation page for wp installation.
 
 == Changelog ==
+= 1.1.0 - 11-05-2025 =
+* Tested up to - 6.8
+* Vulnerable to Local File Inclusion issue fixed
+* Multiple Product verification issue fixed
+
 = 1.0.0 - 04-03-2023 =
 * Initial Release
