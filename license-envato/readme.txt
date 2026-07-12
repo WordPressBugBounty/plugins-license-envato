@@ -3,8 +3,8 @@ Contributors: ashrafulsarkar
 Tags: license, license manager, envato license, plugin license, license envato
 Donate link: https://www.buymeacoffee.com/ashrafulsarkar
 Requires at least: 6.0
-Tested up to: 6.9
-Stable tag: 1.2.0
+Tested up to: 7.0
+Stable tag: 1.2.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -80,13 +80,24 @@ Bugs can be reported on the [GitHub repository](https://github.com/ashrafulsarka
 
 == Screenshots ==
 
-1. Connect your Envato personal token under Settings → Envato tab.
+1. Connect your Envato personal token under Settings - Envato tab.
 2. Account details displayed after a successful token connection.
 3. Verified license list with domain and purchase-code records.
 4. REST API activation and deactivation in action from a client theme/plugin.
 
 
 == Changelog ==
+
+= 1.2.1 - 13-07-2026 =
+* Fixed fatal error when the Envato API returns an empty response
+* Fixed duplicate license rows and stale lookups on sites with persistent object caching (Redis/Memcached) — activation, deactivation and admin list caches are now invalidated correctly
+* Fixed license reactivation not verifying the item ID
+* Failed activations now return a proper error response instead of an empty success
+* Admin license list now paginates in SQL — much faster with large license tables
+* Database schema now upgrades automatically on plugin update — no re-activation needed
+* Invalid purchase codes are cached for 10 minutes to protect your Envato API quota from repeated attempts
+* Clearer, translatable security and error messages
+* Added uninstall cleanup — plugin options and transients are removed on uninstall (license records are preserved for safety)
 
 = 1.2.0 - 18-05-2026 =
 * Plugin version now read dynamically from file header — single source of truth
