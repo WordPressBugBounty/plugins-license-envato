@@ -3,7 +3,7 @@
  * Plugin Name: License For Envato
  * Plugin URI: https://github.com/ashrafulsarkar/envato-licenser
  * Description: Manage your envato market items theme & plugin license.
- * Version: 1.3.0
+ * Version: 1.4.0
  * Author: Ashraful Sarkar Naiem
  * Author URI: https://github.com/ashrafulsarkar
  * Requires at least: 6.0
@@ -53,8 +53,13 @@ function license_envato_process_deactivation_early() {
     if (!is_admin()) {
         return;
     }
-    
-    if (isset($_REQUEST['page']) && $_REQUEST['page'] === 'licenseenvato' &&
+
+    $current_page = isset( $_REQUEST['page'] ) ? sanitize_key( wp_unslash( $_REQUEST['page'] ) ) : '';
+
+    // Matches every one of this plugin's own admin pages (licenseenvato,
+    // licenseenvato-dashboard, …) — deactivate links can appear anywhere
+    // the user list is rendered, not just the original All Users page.
+    if ( 0 === strpos( $current_page, 'licenseenvato' ) &&
         isset($_REQUEST['action']) && $_REQUEST['action'] === 'deactivate') {
 
         // Prevent any output before our redirect
@@ -86,7 +91,7 @@ function license_envato_process_deactivation_early() {
         
         $redirect_url = add_query_arg(
             array(
-                'page' => 'licenseenvato',
+                'page' => $current_page,
             ),
             admin_url('admin.php')
         );
@@ -164,6 +169,8 @@ final class License_Envato {
     public function init_plugin() {
 
         $this->maybe_upgrade();
+
+        ( new LicenseEnvato\Activation() )->maybe_add_itemname_column();
 
         new LicenseEnvato\Assets();
 

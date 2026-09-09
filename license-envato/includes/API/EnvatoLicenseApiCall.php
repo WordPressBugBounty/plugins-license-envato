@@ -118,6 +118,7 @@ class EnvatoLicenseApiCall {
                         </div>
                     </div>
                 </div>
+                <?php do_action( 'license_envato_after_account_details' ); ?>
             </div>
             <?php
             }?>
@@ -477,6 +478,7 @@ class EnvatoLicenseApiCall {
         $support_amount = $data->support_amount;
         $supported_until = $data->supported_until;
         $itemid = $data->item->id;
+        $itemname = isset( $data->item->name ) ? $data->item->name : '';
         $username = $data->buyer;
         $token = bin2hex( random_bytes( 32 ) );
 
@@ -490,6 +492,7 @@ class EnvatoLicenseApiCall {
             array(
                 'username' => $username,
                 'itemid' => $itemid,
+                'itemname' => $itemname,
                 'purchasecode' => $purchaseCode,
                 'token' => $token,
                 'domain' => $domain,
@@ -498,7 +501,7 @@ class EnvatoLicenseApiCall {
                 'support_amount' => $support_amount,
                 'supported_until' => $supported_until
             ),
-            array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
+            array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
         );
 
         $id = $wpdb->insert_id;
